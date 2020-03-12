@@ -1,4 +1,4 @@
-class MyProject
+class PlantCli::CLI
   
   def call 
     puts "test"
