@@ -8,9 +8,9 @@ class RecipeCli::API
     response = HTTParty.get(url)
     #binding.pry 
     puts"Select Recipe From Available List"
-    response["hits"].each do |recipe|
-      name = recipe["recipe"]["yield"] 
-      puts name 
+    response["hits"].each.with_index(1) do |recipe, index|
+      name = recipe["recipe"]["label"] 
+      puts "#{index}. #{name}" 
     end
   end
 end
@@ -23,4 +23,6 @@ end
   #./bin/recipe-project
   #response["hits"][0]
   #response["hits"][0]["recipe"]["yield"]
+  
+
   
