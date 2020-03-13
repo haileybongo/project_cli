@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require './lib/recipe_cli'
+
+RecipeCli::CLI.new.call
+

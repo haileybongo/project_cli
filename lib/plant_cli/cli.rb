@@ -1,4 +1,4 @@
-class PlantCli::CLI
+class RecipeCli::CLI
   
   def call 
     puts "test"
