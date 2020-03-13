@@ -1,4 +1,4 @@
-require_relative "reipe_cli/version"
+require_relative "recipe_cli/version"
 require_relative "recipe_cli/cli"
 
 module RecipeCli
