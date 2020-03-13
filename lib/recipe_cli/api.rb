@@ -32,12 +32,37 @@ class RecipeCli::API
     
     name = response["hits"][user_selection]["recipe"]["label"]
     link = response["hits"][user_selection]["recipe"]["url"]
-    recipe_yeild = response["hits"][user_selection]["recipe"]["yield"]
+    recipe_yield = response["hits"][user_selection]["recipe"]["yield"]
     health_labels = response["hits"][user_selection]["recipe"]["healthLabels"]
     ingredientLines = response["hits"][user_selection]["recipe"]["ingredientLines"]
     calories = response["hits"][user_selection]["recipe"]["calories"]
-    binding.pry 
+    binding.pry
     
+    puts "Good choice. Would you like to view more information or save your recipe? Select from choices below or press q to quit"
+    
+    choice = gets.chomp!
+    
+    until choice == "q"
+    
+    puts "1. Save recipe to your recipe book"
+    puts "2. See recipe link"
+    puts "3. See recipe ingredient list"
+    puts "4. See recipe health labels"
+    puts "5. see recipe calories"
+    puts "6. See recipe servings yield"
+    
+    case choice 
+      when "1"
+        RecipeCli::Recipes.new(name, link, recipe_yield, health_labels, ingredientLines, calories)
+      when "2"
+        link 
+      when "3"
+        ingredientLines
+      when "4"
+        
+      when "5"
+      when "6"
+      
   end
   
   def self.get_ingredients
