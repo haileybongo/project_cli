@@ -1,0 +1,8 @@
+Ask user for ingredients they want to cook with
+Ask for dietary restrictions
+  if yes, list options
+Ask user for Calorie limit
+  if yes, ask for limit
+Display list of recipes by name and have user select
+Display link to recipe 
+Save to my recipes? if yes, save to array of recipe hashes 
