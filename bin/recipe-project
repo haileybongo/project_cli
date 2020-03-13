@@ -4,5 +4,5 @@ require './lib/recipe_cli'
 
 RecipeCli::CLI.new.call
 
-RecipeCli::API.new.fetch("eggplant")
+RecipeCli::API.new.fetch("eggplant, red pepper, garlic, pasta")
 
