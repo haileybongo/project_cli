@@ -3,22 +3,22 @@ require 'pry'
 
 class RecipeCli::API 
   
-  attr_accessor :chosen_recipe, 
+  attr_accessor :chosen_recipe 
   
   def fetch(string, health = nil, calories = nil)
     
-    if health && calories
-      url = "https://api.edamam.com/search?q=#{string}&health=#{health}&calories=100-#{calories.to_i}app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+    if health != nil && calories != nil
+      url = "https://api.edamam.com/search?q=#{string}&health=#{health}&calories=100-#{calories.to_i}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
     elsif health != nil && calories == nil 
       url = "https://api.edamam.com/search?q=#{string}&health=#{health}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
     elsif health == nil && calories != nil 
       url = "https://api.edamam.com/search?q=#{string}&calories=100-#{calories.to_i}app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
     else 
-     url = "https://api.edamam.com/search?q=#{string}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      url = "https://api.edamam.com/search?q=#{string}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
     end
   
     response = HTTParty.get(url)
-    #binding.pry 
+    
     
     puts"Select Recipe From Available List"
     
@@ -27,18 +27,16 @@ class RecipeCli::API
       puts "#{index}. #{name}" 
     end
     
+    
     user_selection = (gets.chomp!.to_i)-1
     
     name = response["hits"][user_selection]["recipe"]["label"]
-    link = response["hits"][user_selection]["url"]["label"]
-    recipe_yeild = response["hits"][user_selection]["yield"]["label"]
-    health_labels = response["hits"][user_selection]["healthLabels"]["label"]
-    ingredientLines = response["hits"][user_selection]["ingredientLines"]["label"]
-    calories = response["hits"][user_selection]["calories"]["label"]
-    
-    
-
-  
+    link = response["hits"][user_selection]["recipe"]["url"]
+    recipe_yeild = response["hits"][user_selection]["recipe"]["yield"]
+    health_labels = response["hits"][user_selection]["recipe"]["healthLabels"]
+    ingredientLines = response["hits"][user_selection]["recipe"]["ingredientLines"]
+    calories = response["hits"][user_selection]["recipe"]["calories"]
+    binding.pry 
     
   end
   
