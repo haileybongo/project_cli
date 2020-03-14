@@ -51,7 +51,7 @@ class RecipeCli::API
     puts "5. see recipe calories"
     puts "6. See recipe servings yield"
     
-    choice = gets.strip
+    choice = gets.strip.to_i 
   
     case choice 
       when "1"
@@ -70,6 +70,8 @@ class RecipeCli::API
         puts "#{@calories} calories"
       when "6"
         puts "#{@recipe_yield} servings"
+      else 
+        puts "Please select a number from the list of options or press q to quit"
       end
   end
   
@@ -82,7 +84,7 @@ end
     @health_labels = response["hits"][user_selection]["recipe"]["healthLabels"]
     @ingredientLines = response["hits"][user_selection]["recipe"]["ingredientLines"]
     @calories = response["hits"][user_selection]["recipe"]["calories"]
-    binding.pry
+    #binding.pry
   end
     
     
