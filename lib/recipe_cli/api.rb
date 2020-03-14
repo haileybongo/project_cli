@@ -38,18 +38,21 @@ class RecipeCli::API
     calories = response["hits"][user_selection]["recipe"]["calories"]
     binding.pry
     
+    choice = ""
+    
+    while choice != "q"
+    
     puts "Good choice. Would you like to view more information or save your recipe? Select from choices below or press q to quit"
-    
-    choice = gets.chomp!
-    
-    until choice == "q"
-    
     puts "1. Save recipe to your recipe book"
     puts "2. See recipe link"
     puts "3. See recipe ingredient list"
     puts "4. See recipe health labels"
     puts "5. see recipe calories"
     puts "6. See recipe servings yield"
+    
+    choice = gets.chomp!
+    
+    
     
     case choice 
       when "1"
