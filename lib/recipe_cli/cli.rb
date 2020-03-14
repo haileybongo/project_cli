@@ -8,8 +8,8 @@ class RecipeCli::CLI
     puts "Do you have dietary restrictions you would like to consider? Enter Y or N"
     
     dietary = ""
-    dietary = gets.chomp!
-     if dietary = "Y"
+    dietary = gets.chomp!.upcase
+     if dietary == "Y"
       puts "Choose from restrictions below:"
       puts "1. Vegetarian"
       puts "2. Vegan"
@@ -20,12 +20,25 @@ class RecipeCli::CLI
       puts "7. Gluten Free"
       
       restrictions = gets.chomp!
+    else 
+      restrictions = nil
+    end
+    
+    puts "Would you like to enter a calorie limit per meal? Enter Y or N"
+    
+    kcal = ""
+    kcal = gets.chomp!.upcase
+      if kcal == "Y"
+        puts "Please enter calorie limit"
+        kcal = gets.chomp!.to_i 
+      else 
+        kcal = nil
+      end 
       
-      
-      RecipeCli::API.new.fetch(users inputs)
-      select_recipe
-      recipe_options
-      view_recipe_book
+    RecipeCli::API.new.fetch(food, restrictions, kcal)
+    RecipeCli::API.select_recipe
+    RecipeCli::API.recipe_options
+    #view_recipe_book
       
   end
   

@@ -20,7 +20,7 @@ class RecipeCli::API
     @response = HTTParty.get(url)
   end 
   
-  def select_recipe
+  def self.select_recipe
     
     puts"Select Recipe From Available List"
     
