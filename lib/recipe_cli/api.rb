@@ -3,7 +3,7 @@ require 'pry'
 
 class RecipeCli::API 
   
-  attr_accessor :chosen_recipe 
+  attr_accessor :chosen_recipe, :name, :link, :recipe_yield, :ingredientLines, :health_labels, :calories
   
   def fetch(string, health = nil, calories = nil)
     
@@ -30,19 +30,20 @@ class RecipeCli::API
     
     user_selection = (gets.chomp!.to_i)-1
     
-    name = response["hits"][user_selection]["recipe"]["label"]
-    link = response["hits"][user_selection]["recipe"]["url"]
-    recipe_yield = response["hits"][user_selection]["recipe"]["yield"]
-    health_labels = response["hits"][user_selection]["recipe"]["healthLabels"]
-    ingredientLines = response["hits"][user_selection]["recipe"]["ingredientLines"]
-    calories = response["hits"][user_selection]["recipe"]["calories"]
+    @name = response["hits"][user_selection]["recipe"]["label"]
+    @link = response["hits"][user_selection]["recipe"]["url"]
+    @recipe_yield = response["hits"][user_selection]["recipe"]["yield"]
+    @health_labels = response["hits"][user_selection]["recipe"]["healthLabels"]
+    @ingredientLines = response["hits"][user_selection]["recipe"]["ingredientLines"]
+    @calories = response["hits"][user_selection]["recipe"]["calories"]
     binding.pry
+    
     
     choice = ""
     
     while choice != "q"
     
-    puts "Good choice. Would you like to view more information or save your recipe? Select from choices below or press q to quit"
+    puts "Would you like to view more information or save your recipe? Select from choices below or press q to quit"
     puts "1. Save recipe to your recipe book"
     puts "2. See recipe link"
     puts "3. See recipe ingredient list"
@@ -50,23 +51,21 @@ class RecipeCli::API
     puts "5. see recipe calories"
     puts "6. See recipe servings yield"
     
-    choice = gets.chomp!
-    
-    
-    
+    choice = gets.strip
+  
     case choice 
       when "1"
         RecipeCli::Recipes.new(name, link, recipe_yield, health_labels, ingredientLines, calories)
       when "2"
-        link 
+        puts "#{link}" 
       when "3"
-        ingredientLines
+        puts "#{ingredientLines}"
       when "4"
-        health_labels
+        puts "#{health_labels}"
       when "5"
-        calories
+        puts "#{calories}"
       when "6"
-        recipe_yield
+        puts "#{recipe_yield}"
       end
   end
   
