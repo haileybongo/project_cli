@@ -59,13 +59,17 @@ class RecipeCli::API
       when "2"
         puts "#{link}" 
       when "3"
-        puts "#{ingredientLines}"
+        ingredientLines.each do |ingredient|
+          puts "#{ingredient}"
+        end
       when "4"
-        puts "#{health_labels}"
+         health_labels.each do |label|
+          puts "#{label}"
+        end
       when "5"
-        puts "#{calories}"
+        puts "#{calories} calories"
       when "6"
-        puts "#{recipe_yield}"
+        puts "#{recipe_yield} servings"
       end
   end
   
