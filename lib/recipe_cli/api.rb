@@ -71,13 +71,14 @@ class RecipeCli::API
     puts "5. see recipe calories"
     puts "6. See recipe servings yield"
     
-    choice = gets.strip.to_i 
+    choice = gets.strip
   
     case choice 
       when "1"
         RecipeCli::Recipes.new(name, link, recipe_yield, health_labels, ingredientLines, calories)
+        puts "Saved!"
       when "2"
-        puts "#{link}" 
+        puts "#{self.link}" 
       when "3"
         @ingredientLines.each do |ingredient|
           puts "#{ingredient}"
@@ -97,7 +98,10 @@ class RecipeCli::API
   
 end
   
-  def self.recipe_facts(user_selection)
+  def recipe_facts(user_selection)
+    
+    response = HTTParty.get(@url)
+    
     @name = response["hits"][user_selection]["recipe"]["label"]
     @link = response["hits"][user_selection]["recipe"]["url"]
     @recipe_yield = response["hits"][user_selection]["recipe"]["yield"]

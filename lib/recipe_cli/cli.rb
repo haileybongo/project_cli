@@ -10,7 +10,7 @@ class RecipeCli::CLI
     dietary = ""
     dietary = gets.chomp!.upcase
      if dietary == "Y"
-      puts "Choose from restrictions below:"
+      puts "Choose from restrictions below by entering number of choice:"
       puts "1. Vegetarian"
       puts "2. Vegan"
       puts "3. Tree Nut Free"
@@ -23,7 +23,7 @@ class RecipeCli::CLI
       
       case restrictions
         when "1" 
-          re6strictions  "vegetarian"
+          restrictions = "vegetarian"
         when "2"
           restrictions = "vegan"
         when "3"
@@ -35,7 +35,7 @@ class RecipeCli::CLI
         when "6"
           restrictions =  "dairy-free"
         when "7"
-          restrictions = "gliten-free"
+          restrictions = "gluten-free"
         else 
           "I don't understand that input. Moving on without restrictions"
           restrictions = nil
@@ -59,7 +59,8 @@ class RecipeCli::CLI
     
     new_search.fetch
     new_search.select_recipe
-    new_search.recipe_options 
+    new_search.recipe_options
+    new_search.
     #RecipeCli::API.all.select_recipe
    # RecipeCli::API.recipe_options
     #view_recipe_book
