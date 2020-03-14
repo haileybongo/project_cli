@@ -20,7 +20,13 @@ class RecipeCli::CLI
       puts "7. Gluten Free"
       
       restrictions = gets.chomp!
-   
+      
+      
+      RecipeCli::API.new.fetch(users inputs)
+      select_recipe
+      recipe_options
+      view_recipe_book
+      
   end
   
 

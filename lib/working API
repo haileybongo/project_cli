@@ -3,7 +3,7 @@ require 'pry'
 
 class RecipeCli::API 
   
-  attr_accessor :chosen_recipe, :name, :link, :recipe_yield, :ingredientLines, :health_labels, :calories, :response
+  attr_accessor :chosen_recipe, :name, :link, :recipe_yield, :ingredientLines, :health_labels, :calories
   
   def fetch(string, health = nil, calories = nil)
     
@@ -17,14 +17,12 @@ class RecipeCli::API
       url = "https://api.edamam.com/search?q=#{string}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
     end
   
-    @response = HTTParty.get(url)
-  end 
-  
-  def select_recipe
+    response = HTTParty.get(url)
+    
     
     puts"Select Recipe From Available List"
     
-    @response["hits"].each.with_index(1) do |recipe, index|
+    response["hits"].each.with_index(1) do |recipe, index|
       name = recipe["recipe"]["label"] 
       puts "#{index}. #{name}" 
     end
@@ -32,12 +30,14 @@ class RecipeCli::API
     
     user_selection = (gets.chomp!.to_i)-1
     
-    recipe_facts(user_selection)
-  
-  end
-  
-  
-  def self.recipe_options
+    @name = response["hits"][user_selection]["recipe"]["label"]
+    @link = response["hits"][user_selection]["recipe"]["url"]
+    @recipe_yield = response["hits"][user_selection]["recipe"]["yield"]
+    @health_labels = response["hits"][user_selection]["recipe"]["healthLabels"]
+    @ingredientLines = response["hits"][user_selection]["recipe"]["ingredientLines"]
+    @calories = response["hits"][user_selection]["recipe"]["calories"]
+    binding.pry
+    
     
     choice = ""
     
@@ -59,30 +59,24 @@ class RecipeCli::API
       when "2"
         puts "#{link}" 
       when "3"
-        @ingredientLines.each do |ingredient|
+        ingredientLines.each do |ingredient|
           puts "#{ingredient}"
         end
       when "4"
-        @health_labels.each do |label|
+         health_labels.each do |label|
           puts "#{label}"
         end
       when "5"
-        puts "#{@calories} calories"
+        puts "#{calories} calories"
       when "6"
-        puts "#{@recipe_yield} servings"
+        puts "#{recipe_yield} servings"
       end
   end
   
 end
   
-  def recipe_facts(user_selection)
-    @name = response["hits"][user_selection]["recipe"]["label"]
-    @link = response["hits"][user_selection]["recipe"]["url"]
-    @recipe_yield = response["hits"][user_selection]["recipe"]["yield"]
-    @health_labels = response["hits"][user_selection]["recipe"]["healthLabels"]
-    @ingredientLines = response["hits"][user_selection]["recipe"]["ingredientLines"]
-    @calories = response["hits"][user_selection]["recipe"]["calories"]
-    binding.pry
+  def self.get_ingredients
+    puts @chosen_recipe["ingredientLines"]
   end
     
     
