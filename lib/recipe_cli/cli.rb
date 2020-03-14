@@ -55,9 +55,13 @@ class RecipeCli::CLI
         kcal = nil
       end 
       
-    RecipeCli::API.new.fetch(food, restrictions, kcal)
-    RecipeCli::API.select_recipe
-    RecipeCli::API.recipe_options
+    new_search = RecipeCli::API.new(food, restrictions, kcal)
+    
+    new_search.fetch
+    new_search.select_recipe
+    new_search.recipe_options 
+    #RecipeCli::API.all.select_recipe
+   # RecipeCli::API.recipe_options
     #view_recipe_book
       
   end

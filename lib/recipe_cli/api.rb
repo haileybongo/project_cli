@@ -14,29 +14,33 @@ class RecipeCli::API
     @user_cals = calories
     @@all << self 
   end
+  
+  def all 
+    @@all
+  end
     
   
-  def fetch(string, health = nil, calories = nil)
-    
-    if health != nil && calories != nil
-      @url = "https://api.edamam.com/search?q=#{string}&health=#{health}&calories=100-#{calories.to_i}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
-    elsif health != nil && calories == nil 
-      @url = "https://api.edamam.com/search?q=#{string}&health=#{health}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
-    elsif health == nil && calories != nil 
-      @url = "https://api.edamam.com/search?q=#{string}&calories=100-#{calories.to_i}app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+  def fetch
+    #(string, health = nil, calories = nil)
+    if @user_health != nil && @user_cals != nil
+     self.url = "https://api.edamam.com/search?q=#{@key_words}&health=#{@user_health}&calories=100-#{@user_cals.to_i}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+    elsif @user_health != nil && @user_cals == nil 
+      self.url = "https://api.edamam.com/search?q=#{string}&health=#{health}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+    elsif @user_health == nil && @user_cals != nil 
+      self.url = "https://api.edamam.com/search?q=#{string}&calories=100-#{calories.to_i}app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
     else 
-      @url = "https://api.edamam.com/search?q=#{string}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      self.url = "https://api.edamam.com/search?q=#{string}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
     end
     binding.pry
 
   end 
   
-  def self.select_recipe
+  def select_recipe
     
     puts"Select Recipe From Available List"
     
     path = @url 
-     binding.pry
+    binding.pry
     
     response = HTTParty.get(path)
    
@@ -53,7 +57,7 @@ class RecipeCli::API
   end
   
   
-  def self.recipe_options
+  def recipe_options
     
     choice = ""
     
@@ -93,7 +97,7 @@ class RecipeCli::API
   
 end
   
-  def recipe_facts(user_selection)
+  def self.recipe_facts(user_selection)
     @name = response["hits"][user_selection]["recipe"]["label"]
     @link = response["hits"][user_selection]["recipe"]["url"]
     @recipe_yield = response["hits"][user_selection]["recipe"]["yield"]
