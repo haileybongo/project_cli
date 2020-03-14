@@ -3,28 +3,44 @@ require 'pry'
 
 class RecipeCli::API 
   
-  attr_accessor :chosen_recipe, :name, :link, :recipe_yield, :ingredientLines, :health_labels, :calories, :response
+  attr_accessor :chosen_recipe, :name, :link, :recipe_yield, :ingredientLines, :health_labels, :calories, :response, :url, :key_words, :user_health, :user_cals
+  
+  
+  @@all = []
+  
+  def initialize(string, health = nil, calories = nil)
+    @key_words = string
+    @user_health = health 
+    @user_cals = calories
+    @@all << self 
+  end
+    
   
   def fetch(string, health = nil, calories = nil)
     
     if health != nil && calories != nil
-      url = "https://api.edamam.com/search?q=#{string}&health=#{health}&calories=100-#{calories.to_i}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      @url = "https://api.edamam.com/search?q=#{string}&health=#{health}&calories=100-#{calories.to_i}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
     elsif health != nil && calories == nil 
-      url = "https://api.edamam.com/search?q=#{string}&health=#{health}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      @url = "https://api.edamam.com/search?q=#{string}&health=#{health}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
     elsif health == nil && calories != nil 
-      url = "https://api.edamam.com/search?q=#{string}&calories=100-#{calories.to_i}app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      @url = "https://api.edamam.com/search?q=#{string}&calories=100-#{calories.to_i}app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
     else 
-      url = "https://api.edamam.com/search?q=#{string}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      @url = "https://api.edamam.com/search?q=#{string}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
     end
-  
-    @response = HTTParty.get(url)
+    binding.pry
+
   end 
   
   def self.select_recipe
     
     puts"Select Recipe From Available List"
     
-    @response["hits"].each.with_index(1) do |recipe, index|
+    path = @url 
+     binding.pry
+    
+    response = HTTParty.get(path)
+   
+    response["hits"].each.with_index(1) do |recipe, index|
       name = recipe["recipe"]["label"] 
       puts "#{index}. #{name}" 
     end

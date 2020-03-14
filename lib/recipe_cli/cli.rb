@@ -20,8 +20,28 @@ class RecipeCli::CLI
       puts "7. Gluten Free"
       
       restrictions = gets.chomp!
-    else 
-      restrictions = nil
+      
+      case restrictions
+        when "1" 
+          re6strictions  "vegetarian"
+        when "2"
+          restrictions = "vegan"
+        when "3"
+          restrictions = "tree-nut-free"
+        when "4"
+          restrictions = "peanut-free"
+        when "5"
+          restrictions = "soy-free"
+        when "6"
+          restrictions =  "dairy-free"
+        when "7"
+          restrictions = "gliten-free"
+        else 
+          "I don't understand that input. Moving on without restrictions"
+          restrictions = nil
+        end
+     else
+        restrictions = nil
     end
     
     puts "Would you like to enter a calorie limit per meal? Enter Y or N"
