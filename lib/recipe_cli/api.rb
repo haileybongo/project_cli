@@ -59,10 +59,12 @@ class RecipeCli::API
       when "3"
         ingredientLines
       when "4"
-        
+        ingredientLines
       when "5"
+        calories
       when "6"
-      
+        recipe_yield
+      end
   end
   
   def self.get_ingredients

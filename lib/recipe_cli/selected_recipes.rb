@@ -7,11 +7,11 @@ class RecipeCli::Recipes
   def initialize(name, link, recipe_yield, health_labels, ingredientLines, calories)
     @chosen_recipe = {}
     @chosen_recipe = {
-      :name => name 
-      :link => link
-      :recipe_yield => recipe_yield
-      :health_labels => health_labels
-      :ingredientLines => ingredientLines
+      :name => name,
+      :link => link,
+      :recipe_yield => recipe_yield,
+      :health_labels => health_labels,
+      :ingredientLines => ingredientLines,
       :calories => calories
     }
     
