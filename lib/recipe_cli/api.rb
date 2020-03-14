@@ -59,13 +59,15 @@ class RecipeCli::API
       when "3"
         ingredientLines
       when "4"
-        ingredientLines
+        health_labels
       when "5"
         calories
       when "6"
         recipe_yield
       end
   end
+  
+end
   
   def self.get_ingredients
     puts @chosen_recipe["ingredientLines"]
