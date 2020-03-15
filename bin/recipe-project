@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require './lib/recipe_cli'
-bundle install 
+
 
 RecipeCli::CLI.new.call
 
