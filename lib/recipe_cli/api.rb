@@ -26,7 +26,7 @@ class RecipeCli::API
       @response = HTTParty.get(@url)
       save_recipes(instance)
     elsif instance.user_health == nil && instance.user_cals != nil 
-      @url = "https://api.edamam.com/search?q=#{instance.key_words}&calories=100-#{instance.user_cals.to_i}app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      @url = "https://api.edamam.com/search?q=#{instance.key_words}&calories=100-#{instance.user_cals.to_i}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
       @response = HTTParty.get(@url)
       save_recipes(instance)
     else 
