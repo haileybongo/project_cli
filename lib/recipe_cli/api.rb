@@ -40,7 +40,7 @@ class RecipeCli::API
   
   
   def save_recipes(instance)
-    binding.pry 
+    #binding.pry 
     @response["hits"].each do |recipe|
       
       
@@ -53,33 +53,11 @@ class RecipeCli::API
   
       new_instance = RecipeCli::Recipe.new(name, link, recipe_yield, health_labels, ingredientLines, calories, instance)
       
-      #@@all << new_instance
     end
-    end
-    
-
-
-    
+  end
 end
     
     
 
-
-  #gets search term = https://api.edamam.com/search?q= pasta,tomato,sausage &app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797
-  
-  #./bin/recipe-project
-  #response["hits"][0]
-  #response["hits"][0]["recipe"]["yield"]
-  # link with health label = https://api.edamam.com/search?q=eggplant&health=peanut-free&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797
-  #link with health & calories = https://api.edamam.com/search?q=eggplant&health=peanut-free&calories=100-600&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797
-  
-  
-    #name = "label"
-    #link = "url"
-    #yield = "yield"
-    #health_labels = "healthLabels"
-    #ingredientLines = "ingredientLines"
-    #calories = "calories"
-  
 
   

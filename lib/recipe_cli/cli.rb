@@ -55,8 +55,6 @@ class RecipeCli::CLI
     
     puts"Select Recipe From Available List"
     
-    #RecipeCli::Recipes.select_recipe
-    
     user_selection = -1
     
     until user_selection.to_i >= 0 && user_selection.to_i <=9
@@ -65,7 +63,6 @@ class RecipeCli::CLI
       name = recipe.name 
       puts "#{index}. #{name}" 
       end
-    
     
   
      user_selection = (gets.chomp!.to_i)-1

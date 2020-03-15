@@ -21,6 +21,5 @@ class RecipeCli::Recipe
     @@all
   end
     
-    
-  end
+end
   
