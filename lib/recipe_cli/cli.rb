@@ -51,28 +51,56 @@ class RecipeCli::CLI
       end 
       
     new_search = RecipeCli::API.new(food, restrictions, kcal)
-    new_search.fetch
-    new_search.select_recipe
-    new_search.recipe_options
     
+    puts"Select Recipe From Available List"
+    
+    RecipeCli::Recipes.select_recipe
+
+    choice = ""
+    
+    until choice == "q"
+    
+    puts "Would you like to view more information? Select from choices below or press q to quit"
+    puts "1. See recipe link"
+    puts "2. See recipe ingredient list"
+    puts "3. See recipe health labels"
+    puts "4. see recipe calories"
+    puts "5. See recipe servings yield"
+    
+    choice = gets.strip
+  
+    case choice 
+      when "1"
+          RecipeCli::RecipeInfo.link 
+      when "2"
+          RecipeCli::RecipeInfo.ingredients
+      when "3"
+        RecipeCli::RecipeInfo.health
+      when "4"
+        RecipeCli::RecipeInfo.calories
+      when "5"
+        RecipeCli::RecipeInfo.servings
+      else 
+        puts "Please select a number from the list of options or press q to quit"
+        puts " "
+        puts " "
+      end
+  end
     
     choice = ""
     
-    while choice!= "quit"
+    until choice == "quit"
     
     puts "Would you like to search again or quit? Enter search or quit."
 
     choice = gets.chomp!
     
-    case choice 
-      when "search"
-        call
-      when choice != "search" || choice !="quit" 
-      puts "Sorry, I don't understand that."
+      case choice 
+        when "search"
+          call
+        when choice != "search" || choice !="quit" 
+        puts "Sorry, I don't understand that."
+      end
     end
-  end
-
-  
-  end
-  
+ end
 end
