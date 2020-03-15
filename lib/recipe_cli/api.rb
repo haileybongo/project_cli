@@ -30,7 +30,7 @@ class RecipeCli::API
     else 
       self.url = "https://api.edamam.com/search?q=#{@key_words}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
     end
-    binding.pry
+    #binding.pry
 
   end 
   
@@ -39,9 +39,10 @@ class RecipeCli::API
     puts"Select Recipe From Available List"
     
     path = @url 
-    binding.pry
+   
     
     response = HTTParty.get(path)
+    
    
     response["hits"].each.with_index(1) do |recipe, index|
       name = recipe["recipe"]["label"] 
@@ -50,8 +51,13 @@ class RecipeCli::API
     
     
     user_selection = (gets.chomp!.to_i)-1
+     binding.pry
     
-    recipe_facts(user_selection)
+    if user_selection >= 0 && user_selection <=9
+     recipe_facts(user_selection)
+    else 
+      select_recipe
+    end
   
   end
   
@@ -74,20 +80,32 @@ class RecipeCli::API
     case choice 
       when "1"
          puts "#{self.link}" 
+         puts " "
+         puts " "
       when "2"
         @ingredientLines.each do |ingredient|
           puts "#{ingredient}"
         end
+        puts " "
+        puts " "
       when "3"
         @health_labels.each do |label|
           puts "#{label}"
         end
+        puts " "
+        puts " "
       when "4"
         puts "#{@calories} calories"
+        puts " "
+        puts " "
       when "5"
         puts "#{@recipe_yield} servings"
+        puts " "
+        puts " "
       else 
         puts "Please select a number from the list of options or press q to quit"
+        puts " "
+        puts " "
       end
   end
   

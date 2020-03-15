@@ -15,9 +15,8 @@ class RecipeCli::CLI
       puts "2. Vegan"
       puts "3. Tree Nut Free"
       puts "4. Peanut Free"
-      puts "5. No Soy"
-      puts "6. Dairy Free"
-      puts "7. Gluten Free"
+      puts "5. Low Sugar"
+
       
       restrictions = gets.chomp!
       
@@ -31,11 +30,7 @@ class RecipeCli::CLI
         when "4"
           restrictions = "peanut-free"
         when "5"
-          restrictions = "soy-free"
-        when "6"
-          restrictions =  "dairy-free"
-        when "7"
-          restrictions = "gluten-free"
+          restrictions = "sugar-conscious"
         else 
           "I don't understand that input. Moving on without restrictions"
           restrictions = nil
@@ -72,7 +67,7 @@ class RecipeCli::CLI
     case choice 
       when "search"
         call
-      else 
+      when choice != "search" || choice !="quit" 
       puts "Sorry, I don't understand that."
     end
   end

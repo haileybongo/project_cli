@@ -1,10 +1,6 @@
 # ProjectCli
 
-HELLO WORLD
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/project_cli`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Hello, this gem allows users to enter key words to search for recipes by. It then gives the user an option to add certain dietary restrictions and/or a calorie limit to search by. Once parameters are set, a list of 10 recipes is presented and user can select one from the list. Once a recipe is chosen, the user can choose which peice of information to view about the recipe or exit that search. User is then prompted to search again or exit the program. 
 
 ## Installation
 
@@ -24,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Run the recipe-project bin file and follow on screen prompts. 
 
 ## Development
 
