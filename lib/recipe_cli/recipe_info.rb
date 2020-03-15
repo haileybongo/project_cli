@@ -5,15 +5,19 @@ class RecipeCli::RecipeInfo
 
   
   def self.recipe_facts(user_selection)
+   choice =  recipe.all[user_selection]
+   
+   @name = choice.name
+   @link = choice.link
+   @recipe_yield = choice.recipe_yield
     
     
-    
-    @name = RecipeCli::API.all[user_selection]["recipe"]["label"]
-    @link = RecipeCli::API.all[user_selection]["recipe"]["url"]
-    @recipe_yield = RecipeCli::API.all[user_selection]["recipe"]["yield"]
-    @health_labels = RecipeCli::API.all[user_selection]["recipe"]["healthLabels"]
-    @ingredientLines = RecipeCli::API.all[user_selection]["recipe"]["ingredientLines"]
-    @calories = RecipeCli::API.all[user_selection]["recipe"]["calories"]
+    #@name = RecipeCli::API.all[user_selection]["recipe"]["label"]
+    #@link = RecipeCli::API.all[user_selection]["recipe"]["url"]
+    #@recipe_yield = RecipeCli::API.all[user_selection]["recipe"]["yield"]
+    #@health_labels = RecipeCli::API.all[user_selection]["recipe"]["healthLabels"]
+    #@ingredientLines = RecipeCli::API.all[user_selection]["recipe"]["ingredientLines"]
+    #@calories = RecipeCli::API.all[user_selection]["recipe"]["calories"]
     binding.pry
   end
  

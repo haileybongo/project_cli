@@ -7,41 +7,57 @@ class RecipeCli::API
   
   @@all = []
   
-  def initialize(string, health = nil, calories = nil)
-    @key_words = string
-    @user_health = health 
-    @user_cals = calories
-    self.fetch 
-    @response = HTTParty.get(@url)
-    self.save_recipes 
-  end
+  #def initialize(string, health = nil, calories = nil)
+    #@key_words = string
+    #@user_health = health 
+    #@user_cals = calories
+    #self.fetch 
+    #@response = HTTParty.get(@url)
+    #self.save_recipes 
+  #end
   
-  def fetch
-    if @user_health != nil && @user_cals != nil
-     @url = "https://api.edamam.com/search?q=#{@key_words}&health=#{@user_health}&calories=100-#{@user_cals.to_i}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
-    elsif @user_health != nil && @user_cals == nil 
-      @url = "https://api.edamam.com/search?q=#{@key_words}&health=#{@user_health}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
-    elsif @user_health == nil && @user_cals != nil 
-      @url = "https://api.edamam.com/search?q=#{@key_words}&calories=100-#{@user_cals.to_i}app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+  def fetch(instance)
+    if instance.user_health != nil && instance.user_cals != nil
+     @url = "https://api.edamam.com/search?q=#{instance.key_words}&health=#{instance.user_health}&calories=100-#{instance.user_cals.to_i}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+     @response = HTTParty.get(@url)
+      save_recipes(instance)
+    elsif instance.user_health != nil && instance.user_cals == nil 
+      @url = "https://api.edamam.com/search?q=#{instance.key_words}&health=#{instance.user_health}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      @response = HTTParty.get(@url)
+      save_recipes(instance)
+    elsif instance.user_health == nil && instance.user_cals != nil 
+      @url = "https://api.edamam.com/search?q=#{instance.key_words}&calories=100-#{instance.user_cals.to_i}app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      @response = HTTParty.get(@url)
+      save_recipes(instance)
     else 
-      @url = "https://api.edamam.com/search?q=#{@key_words}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      @url = "https://api.edamam.com/search?q=#{instance.key_words}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      @response = HTTParty.get(@url)
+      save_recipes(instance)
     end
-    #binding.pry
+    binding.pry
 
   end 
   
   
-  def save_recipes
+  def save_recipes(instance)
+    binding.pry 
     @response["hits"].each do |recipe|
-      @@all << recipe
+      
+      
+      name = RecipeCli::API.all[user_selection]["recipe"]["label"]
+      link = RecipeCli::API.all[user_selection]["recipe"]["url"]
+      recipe_yield = RecipeCli::API.all[user_selection]["recipe"]["yield"]
+      health_labels = RecipeCli::API.all[user_selection]["recipe"]["healthLabels"]
+      ingredientLines = RecipeCli::API.all[user_selection]["recipe"]["ingredientLines"]
+      calories = RecipeCli::API.all[user_selection]["recipe"]["calories"]
+  
+      new_instance = RecipeCli::Recipe.new(name, link, recipe_yield, health_labels, ingredientLines, instance)
+      
+      #@@all << new_instance
     end
     end
     
-    
-  def self.all 
-    @@all
-  end
-    
+
 
     
 end

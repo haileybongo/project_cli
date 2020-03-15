@@ -50,11 +50,26 @@ class RecipeCli::CLI
         kcal = nil
       end 
       
-    new_search = RecipeCli::API.new(food, restrictions, kcal)
+    new_search = RecipeCli::Ingredients.new(food, restrictions, kcal)
+    RecipeCli::API.new.fetch(new_search)
     
     puts"Select Recipe From Available List"
     
-    RecipeCli::Recipes.select_recipe
+    #RecipeCli::Recipes.select_recipe
+    until user_selection >= 0 && user_selection <=9
+  
+    RecipeCli::Recipe.all.each.with_index(1) do |recipe, index|
+      name = recipe.name 
+      puts "#{index}. #{name}" 
+      end
+    
+    # binding.pry
+  
+     user_selection = (gets.chomp!.to_i)-1
+
+    end
+    
+    
 
     choice = ""
     
@@ -71,7 +86,7 @@ class RecipeCli::CLI
   
     case choice 
       when "1"
-          RecipeCli::RecipeInfo.link 
+          RecipeCli::Recipe.all[user_selection].name  
       when "2"
           RecipeCli::RecipeInfo.ingredients
       when "3"
