@@ -34,7 +34,7 @@ class RecipeCli::API
       @response = HTTParty.get(@url)
       save_recipes(instance)
     end
-    binding.pry
+    #binding.pry
 
   end 
   
@@ -44,14 +44,14 @@ class RecipeCli::API
     @response["hits"].each do |recipe|
       
       
-      name = RecipeCli::API.all[user_selection]["recipe"]["label"]
-      link = RecipeCli::API.all[user_selection]["recipe"]["url"]
-      recipe_yield = RecipeCli::API.all[user_selection]["recipe"]["yield"]
-      health_labels = RecipeCli::API.all[user_selection]["recipe"]["healthLabels"]
-      ingredientLines = RecipeCli::API.all[user_selection]["recipe"]["ingredientLines"]
-      calories = RecipeCli::API.all[user_selection]["recipe"]["calories"]
+      name = recipe["recipe"]["label"]
+      link = recipe ["recipe"]["url"]
+      recipe_yield = recipe["recipe"]["yield"]
+      health_labels = recipe["recipe"]["healthLabels"]
+      ingredientLines = recipe["recipe"]["ingredientLines"]
+      calories = recipe["recipe"]["calories"]
   
-      new_instance = RecipeCli::Recipe.new(name, link, recipe_yield, health_labels, ingredientLines, instance)
+      new_instance = RecipeCli::Recipe.new(name, link, recipe_yield, health_labels, ingredientLines, calories, instance)
       
       #@@all << new_instance
     end

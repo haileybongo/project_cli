@@ -56,17 +56,21 @@ class RecipeCli::CLI
     puts"Select Recipe From Available List"
     
     #RecipeCli::Recipes.select_recipe
-    until user_selection >= 0 && user_selection <=9
+    
+    user_selection = -1
+    
+    until user_selection.to_i >= 0 && user_selection.to_i <=9
   
     RecipeCli::Recipe.all.each.with_index(1) do |recipe, index|
       name = recipe.name 
       puts "#{index}. #{name}" 
       end
     
-    # binding.pry
+    
   
      user_selection = (gets.chomp!.to_i)-1
-
+      
+      #binding.pry
     end
     
     
@@ -86,15 +90,29 @@ class RecipeCli::CLI
   
     case choice 
       when "1"
-          RecipeCli::Recipe.all[user_selection].name  
+          puts "#{RecipeCli::Recipe.all[user_selection].link}"  
+          puts " "
+          puts " "
       when "2"
-          RecipeCli::RecipeInfo.ingredients
+         RecipeCli::Recipe.all[user_selection].ingredientLines.each do |ingredient|
+          puts "#{ingredient}"
+        end
+          puts " "
+          puts " "
       when "3"
-        RecipeCli::RecipeInfo.health
+          RecipeCli::Recipe.all[user_selection].health_labels.each do |health|
+          puts "#{health}"
+        end
+          puts " "
+          puts " "
       when "4"
-        RecipeCli::RecipeInfo.calories
+         puts "#{RecipeCli::Recipe.all[user_selection].calories}"
+          puts " "
+          puts " "
       when "5"
-        RecipeCli::RecipeInfo.servings
+         puts "#{RecipeCli::Recipe.all[user_selection].recipe_yield}"
+          puts " "
+          puts " "
       else 
         puts "Please select a number from the list of options or press q to quit"
         puts " "
