@@ -21,15 +21,14 @@ class RecipeCli::API
     
   
   def fetch
-    #(string, health = nil, calories = nil)
     if @user_health != nil && @user_cals != nil
      self.url = "https://api.edamam.com/search?q=#{@key_words}&health=#{@user_health}&calories=100-#{@user_cals.to_i}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
     elsif @user_health != nil && @user_cals == nil 
-      self.url = "https://api.edamam.com/search?q=#{string}&health=#{health}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      self.url = "https://api.edamam.com/search?q=#{@key_words}&health=#{@user_health}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
     elsif @user_health == nil && @user_cals != nil 
-      self.url = "https://api.edamam.com/search?q=#{string}&calories=100-#{calories.to_i}app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      self.url = "https://api.edamam.com/search?q=#{@key_words}&calories=100-#{@user_cals.to_i}app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
     else 
-      self.url = "https://api.edamam.com/search?q=#{string}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      self.url = "https://api.edamam.com/search?q=#{@key_words}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
     end
     binding.pry
 
@@ -63,33 +62,29 @@ class RecipeCli::API
     
     while choice != "q"
     
-    puts "Would you like to view more information or save your recipe? Select from choices below or press q to quit"
-    puts "1. Save recipe to your recipe book"
-    puts "2. See recipe link"
-    puts "3. See recipe ingredient list"
-    puts "4. See recipe health labels"
-    puts "5. see recipe calories"
-    puts "6. See recipe servings yield"
+    puts "Would you like to view more information? Select from choices below or press q to quit"
+    puts "1. See recipe link"
+    puts "2. See recipe ingredient list"
+    puts "3. See recipe health labels"
+    puts "4. see recipe calories"
+    puts "5. See recipe servings yield"
     
     choice = gets.strip
   
     case choice 
       when "1"
-        RecipeCli::Recipes.new(name, link, recipe_yield, health_labels, ingredientLines, calories)
-        puts "Saved!"
+         puts "#{self.link}" 
       when "2"
-        puts "#{self.link}" 
-      when "3"
         @ingredientLines.each do |ingredient|
           puts "#{ingredient}"
         end
-      when "4"
+      when "3"
         @health_labels.each do |label|
           puts "#{label}"
         end
-      when "5"
+      when "4"
         puts "#{@calories} calories"
-      when "6"
+      when "5"
         puts "#{@recipe_yield} servings"
       else 
         puts "Please select a number from the list of options or press q to quit"
