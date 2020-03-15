@@ -51,7 +51,7 @@ class RecipeCli::API
     
     
     user_selection = (gets.chomp!.to_i)-1
-     binding.pry
+    # binding.pry
     
     if user_selection >= 0 && user_selection <=9
      recipe_facts(user_selection)
