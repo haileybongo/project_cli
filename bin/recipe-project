@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
 
 require './lib/recipe_cli'
+bundle install 
 
 RecipeCli::CLI.new.call
 
-#RecipeCli::API.new.fetch("eggplant, red pepper, garlic, pasta", "peanut-free", "600")
+
 
