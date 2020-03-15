@@ -25,7 +25,7 @@ class RecipeCli::API
       @response = HTTParty.get(@url)
       save_recipes(instance)
     end
-    binding.pry
+    #binding.pry
 
   end 
   

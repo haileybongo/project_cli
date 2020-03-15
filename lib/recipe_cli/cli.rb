@@ -103,7 +103,7 @@ class RecipeCli::CLI
           puts " "
           puts " "
       when "4"
-         puts "#{RecipeCli::Recipe.all[user_selection].calories}"
+         puts "#{RecipeCli::Recipe.all[user_selection].calories.to_i}"
           puts " "
           puts " "
       when "5"
