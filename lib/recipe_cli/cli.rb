@@ -62,7 +62,7 @@ class RecipeCli::CLI
     recipe_list = []
     recipe_list =  RecipeCli::Recipe.all.select {|recipe| recipe.ingredients == new_search}
     
-    binding.pry 
+    #binding.pry 
     
     recipe_list.each.with_index(1) do |recipe, index|
       name = recipe.name 
@@ -92,27 +92,27 @@ class RecipeCli::CLI
   
     case choice 
       when "1"
-          puts "#{RecipeCli::Recipe.all[user_selection].link}"  
+          puts "#{recipe_list[user_selection].link}"  
           puts " "
           puts " "
       when "2"
-         RecipeCli::Recipe.all[user_selection].ingredientLines.each do |ingredient|
+         recipe_list[user_selection].ingredientLines.each do |ingredient|
           puts "#{ingredient}"
         end
           puts " "
           puts " "
       when "3"
-          RecipeCli::Recipe.all[user_selection].health_labels.each do |health|
+          recipe_list[user_selection].health_labels.each do |health|
           puts "#{health}"
         end
           puts " "
           puts " "
       when "4"
-         puts "#{RecipeCli::Recipe.all[user_selection].calories.to_i}"
+         puts "#{recipe_list[user_selection].calories.to_i}"
           puts " "
           puts " "
       when "5"
-         puts "#{RecipeCli::Recipe.all[user_selection].recipe_yield}"
+         puts "#{recipe_list[user_selection].recipe_yield}"
           puts " "
           puts " "
       else 
@@ -133,9 +133,11 @@ class RecipeCli::CLI
       case choice 
         when "search"
           call
+        when "quit"
+          exit  
         when choice != "search" || choice !="quit" 
         puts "Sorry, I don't understand that."
       end
-    end
- end
+      end
+   end
 end
