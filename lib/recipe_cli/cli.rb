@@ -59,7 +59,12 @@ class RecipeCli::CLI
     
     until user_selection.to_i >= 0 && user_selection.to_i <=9
   
-    RecipeCli::Recipe.all.each.with_index(1) do |recipe, index|
+    recipe_list = []
+    recipe_list =  RecipeCli::Recipe.all.select {|recipe| recipe.ingredients == new_search}
+    
+    binding.pry 
+    
+    recipe_list.each.with_index(1) do |recipe, index|
       name = recipe.name 
       puts "#{index}. #{name}" 
       end
@@ -111,7 +116,6 @@ class RecipeCli::CLI
           puts " "
           puts " "
       else 
-        puts "Please select a number from the list of options or press q to quit"
         puts " "
         puts " "
       end
@@ -119,10 +123,11 @@ class RecipeCli::CLI
     
     choice = ""
     
-    until choice == "quit"
     
     puts "Would you like to search again or quit? Enter search or quit."
-
+    
+    until choice == "quit"
+    
     choice = gets.chomp!
     
       case choice 
