@@ -1,6 +1,6 @@
 class RecipeCli::Recipe 
   
-  attr_accessor :chosen_recipe, :name, :link, :recipe_yield, :ingredientLines, :health_labels, :calories, :response, :url, :key_words, :user_health, :user_cals, :ingredients
+  attr_accessor :name, :link, :recipe_yield, :ingredientLines, :health_labels, :calories, :ingredients
   
   @@all = []
   

@@ -2,8 +2,8 @@ class RecipeCli::CLI
   
   def call 
     puts "Hello! Welcome to Recipe Search. What ingredients would you like to search for?"
-     food = ""
-     food = gets.chomp!
+     key_words = ""
+     kew_words = gets.chomp!
     
     puts "Do you have dietary restrictions you would like to consider? Enter Y or N"
     
@@ -50,29 +50,26 @@ class RecipeCli::CLI
         kcal = nil
       end 
       
-    new_search = RecipeCli::Ingredients.new(food, restrictions, kcal)
+    new_search = RecipeCli::UserInput.new(key_words, restrictions, kcal)
     RecipeCli::API.new.fetch(new_search)
     
     puts"Select Recipe From Available List"
     
     user_selection = -1
     
-    until user_selection.to_i >= 0 && user_selection.to_i <=9
+    until user_selection.to_i >= 0 && user_selection.to_i <= RecipeCli::Recipe.all.size
   
     recipe_list = []
     recipe_list =  RecipeCli::Recipe.all.select {|recipe| recipe.ingredients == new_search}
     
-    #binding.pry 
     
     recipe_list.each.with_index(1) do |recipe, index|
       name = recipe.name 
       puts "#{index}. #{name}" 
       end
     
-  
      user_selection = (gets.chomp!.to_i)-1
       
-      #binding.pry
     end
     
     
@@ -138,6 +135,6 @@ class RecipeCli::CLI
         when choice != "search" || choice !="quit" 
         puts "Sorry, I don't understand that."
       end
-      end
+    end
    end
 end

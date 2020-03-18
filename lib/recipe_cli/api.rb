@@ -1,37 +1,30 @@
-require 'httparty'
-require 'pry'
-
 class RecipeCli::API 
   
-  attr_accessor :chosen_recipe, :name, :link, :recipe_yield, :ingredientLines, :health_labels, :calories, :response, :url, :key_words, :user_health, :user_cals
+  attr_accessor :response
   
-  @@all = []
   
   def fetch(instance)
     if instance.user_health != nil && instance.user_cals != nil
-     @url = "https://api.edamam.com/search?q=#{instance.key_words}&health=#{instance.user_health}&calories=100-#{instance.user_cals.to_i}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
-     @response = HTTParty.get(@url)
+     url = "https://api.edamam.com/search?q=#{instance.key_words}&health=#{instance.user_health}&calories=100-#{instance.user_cals.to_i}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+     @response = HTTParty.get(url)
       save_recipes(instance)
     elsif instance.user_health != nil && instance.user_cals == nil 
-      @url = "https://api.edamam.com/search?q=#{instance.key_words}&health=#{instance.user_health}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
-      @response = HTTParty.get(@url)
+      url = "https://api.edamam.com/search?q=#{instance.key_words}&health=#{instance.user_health}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      @response = HTTParty.get(url)
       save_recipes(instance)
     elsif instance.user_health == nil && instance.user_cals != nil 
-      @url = "https://api.edamam.com/search?q=#{instance.key_words}&calories=100-#{instance.user_cals.to_i}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
-      @response = HTTParty.get(@url)
+      url = "https://api.edamam.com/search?q=#{instance.key_words}&calories=100-#{instance.user_cals.to_i}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      @response = HTTParty.get(url)
       save_recipes(instance)
     else 
-      @url = "https://api.edamam.com/search?q=#{instance.key_words}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
-      @response = HTTParty.get(@url)
+      url = "https://api.edamam.com/search?q=#{instance.key_words}&app_id=f6f7d13e&app_key=3e087fb68f68af8ea863608aa9f7d797"
+      @response = HTTParty.get(url)
       save_recipes(instance)
     end
-    #binding.pry
-
   end 
   
   
-  def save_recipes(instance)
-    #binding.pry 
+  def save_recipes(instance)    
     @response["hits"].each do |recipe|
       
       

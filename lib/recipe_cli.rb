@@ -4,11 +4,6 @@ require_relative "recipe_cli/api"
 require_relative "recipe_cli/ingredients"
 require_relative "recipe_cli/recipe"
 
-require 'pry'
-require 'httparty'
 
 
-module RecipeCli
-  class Error < StandardError; end
-  # Your code goes here...
-end
+
