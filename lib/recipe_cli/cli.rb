@@ -8,47 +8,63 @@ class RecipeCli::CLI
     puts "Do you have dietary restrictions you would like to consider? Enter Y or N"
     
     dietary = ""
+    restrictions = ""
+    
+    until dietary == "Y" || dietary == "N"
+    
     dietary = gets.chomp!.upcase
-     if dietary == "Y"
-      puts "Choose from restrictions below by entering number of choice:"
-      puts "1. Vegetarian"
-      puts "2. Vegan"
-      puts "3. Tree Nut Free"
-      puts "4. Peanut Free"
-      puts "5. Low Sugar"
-
+    
+      if dietary == "Y"
+       puts "Choose from restrictions below by entering number of choice:"
+       puts "1. Vegetarian"
+       puts "2. Vegan"
+       puts "3. Tree Nut Free"
+       puts "4. Peanut Free"
+       puts "5. Low Sugar"
+       
+        until restrictions == "1" || restrictions == "2" || restrictions == "3" || restrictions == "4" || restrictions == "5"
+    
+        restrictions = gets.chomp!
       
-      restrictions = gets.chomp!
-      
-      case restrictions
-        when "1" 
-          restrictions = "vegetarian"
-        when "2"
-          restrictions = "vegan"
-        when "3"
-          restrictions = "tree-nut-free"
-        when "4"
-          restrictions = "peanut-free"
-        when "5"
-          restrictions = "sugar-conscious"
-        else 
-          "I don't understand that input. Moving on without restrictions"
-          restrictions = nil
+        case restrictions
+          when "1" 
+            restrictions = "vegetarian"
+          when "2"
+            restrictions = "vegan"
+          when "3"
+            restrictions = "tree-nut-free"
+          when "4"
+            restrictions = "peanut-free"
+          when "5"
+            restrictions = "sugar-conscious"
+          else 
+            puts "Please choose 1-5 from list."
+          end
         end
-     else
-        restrictions = nil
+      elsif dietary == "N"
+      restrictions = nil 
+    else
+      puts "Please choose Y or N."
+      end
     end
-    
+  
     puts "Would you like to enter a calorie limit per meal? Enter Y or N"
-    
+  
     kcal = ""
+    
+    until kcal == "Y" || kcal == "N"
+    
     kcal = gets.chomp!.upcase
+      
       if kcal == "Y"
         puts "Please enter calorie limit"
         kcal = gets.chomp!.to_i 
-      else 
+      elsif kcal == "N" 
         kcal = nil
+      else 
+        puts "Please choose Y or N."
       end 
+    end
       
     new_search = RecipeCli::UserInput.new(key_words, restrictions, kcal)
     RecipeCli::API.new.fetch(new_search)
@@ -137,4 +153,5 @@ class RecipeCli::CLI
       end
     end
    end
-end
+ end
+
