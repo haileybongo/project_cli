@@ -8,6 +8,7 @@ class RecipeCli::CLI
     puts "Do you have dietary restrictions you would like to consider? Enter Y or N"
     
     dietary = ""
+    choice = ""
     restrictions = ""
     
     until dietary == "Y" || dietary == "N"
@@ -15,18 +16,17 @@ class RecipeCli::CLI
     dietary = gets.chomp!.upcase
     
       if dietary == "Y"
-       puts "Choose from restrictions below by entering number of choice:"
-       puts "1. Vegetarian"
-       puts "2. Vegan"
-       puts "3. Tree Nut Free"
-       puts "4. Peanut Free"
-       puts "5. Low Sugar"
-       
-        until restrictions == "1" || restrictions == "2" || restrictions == "3" || restrictions == "4" || restrictions == "5"
-    
-        restrictions = gets.chomp!
+
+        until choice == "1" || choice == "2" || choice == "3" || choice == "4" || choice == "5"
+           puts "Choose from restrictions below by entering number of choice:"
+           puts "1. Vegetarian"
+           puts "2. Vegan"
+           puts "3. Tree Nut Free"
+           puts "4. Peanut Free"
+           puts "5. Low Sugar"
+          choice = gets.chomp!
       
-        case restrictions
+        case choice
           when "1" 
             restrictions = "vegetarian"
           when "2"
@@ -50,16 +50,16 @@ class RecipeCli::CLI
   
     puts "Would you like to enter a calorie limit per meal? Enter Y or N"
   
-    kcal = ""
+    choice = ""
     
-    until kcal == "Y" || kcal == "N"
+    until choice == "Y" || choice == "N"
     
-    kcal = gets.chomp!.upcase
+    choice = gets.chomp!.upcase
       
-      if kcal == "Y"
+      if choice == "Y"
         puts "Please enter calorie limit"
         kcal = gets.chomp!.to_i 
-      elsif kcal == "N" 
+      elsif choice == "N" 
         kcal = nil
       else 
         puts "Please choose Y or N."
