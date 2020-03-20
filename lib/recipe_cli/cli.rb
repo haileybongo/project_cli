@@ -3,7 +3,7 @@ class RecipeCli::CLI
   def call 
     puts "Hello! Welcome to Recipe Search. What ingredients would you like to search for?"
      key_words = ""
-     kew_words = gets.chomp!
+     key_words = gets.chomp!
     
     puts "Do you have dietary restrictions you would like to consider? Enter Y or N"
     
@@ -73,10 +73,13 @@ class RecipeCli::CLI
     
     user_selection = -1
     
-    until user_selection.to_i >= 0 && user_selection.to_i <= RecipeCli::Recipe.all.size
-  
     recipe_list = []
     recipe_list =  RecipeCli::Recipe.all.select {|recipe| recipe.ingredients == new_search}
+    
+    
+    until user_selection.to_i >= 0 && user_selection.to_i <= recipe_list.size
+  
+
     
     
     recipe_list.each.with_index(1) do |recipe, index|
