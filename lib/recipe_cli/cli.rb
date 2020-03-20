@@ -77,10 +77,8 @@ class RecipeCli::CLI
     recipe_list =  RecipeCli::Recipe.all.select {|recipe| recipe.ingredients == new_search}
     
     
-    until user_selection.to_i >= 0 && user_selection.to_i <= recipe_list.size
-  
-
-    
+    until user_selection.to_i >= 0 && user_selection.to_i <= recipe_list.size - 1
+    binding.pry 
     
     recipe_list.each.with_index(1) do |recipe, index|
       name = recipe.name 
