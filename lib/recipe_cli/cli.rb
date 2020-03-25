@@ -97,17 +97,20 @@ class RecipeCli::CLI
       @recipe_list = []
       @recipe_list =  RecipeCli::Recipe.all.select {|recipe| recipe.user_input == new_search}
       
-      
-      until @user_selection.to_i >= 0 && @user_selection.to_i <= recipe_list.size - 1
+      if recipe_list == []
+        puts "Sorry, no recipes match."
+        call
+      else
+        until @user_selection.to_i >= 0 && @user_selection.to_i <= recipe_list.size - 1
   
       
-      @recipe_list.each.with_index(1) do |recipe, index|
-        name = recipe.name 
-        puts "#{index}. #{name}" 
-        end
-      
-       @user_selection = (gets.chomp!.to_i)-1
+        @recipe_list.each.with_index(1) do |recipe, index|
+          name = recipe.name 
+          puts "#{index}. #{name}" 
+          end
         
+         @user_selection = (gets.chomp!.to_i)-1
+        end
       end
   end
   
