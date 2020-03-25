@@ -3,9 +3,7 @@ class RecipeCli::CLI
   attr_accessor :key_words, :restrictions, :kcal, :recipe_list, :user_selection
   
   def call 
-    puts "Hello! Welcome to Recipe Search. What ingredients would you like to search for?"
-     @key_words = ""
-     @key_words = gets.chomp!
+     self.intro 
      self.dietary_restrictions
      self.calorie_limit
      self.recipe_search
@@ -13,7 +11,14 @@ class RecipeCli::CLI
      self.search_or_quit
    end
    
-     def dietary_restrictions
+  def intro 
+     puts "Hello! Welcome to Recipe Search. What ingredients would you like to search for?"
+     @key_words = ""
+     @key_words = gets.chomp!
+  end
+     
+
+  def dietary_restrictions
       
       puts "Do you have dietary restrictions you would like to consider? Enter Y or N"
       
@@ -57,9 +62,9 @@ class RecipeCli::CLI
         puts "Please choose Y or N."
         end
       end
-    end
+  end
   
-    def calorie_limit
+  def calorie_limit
     
       puts "Would you like to enter a calorie limit per meal? Enter Y or N"
     
@@ -78,9 +83,9 @@ class RecipeCli::CLI
           puts "Please choose Y or N."
         end 
       end
-    end
+  end
     
-    def recipe_search
+  def recipe_search
         
       new_search = RecipeCli::UserInput.new(key_words, restrictions, kcal)
       RecipeCli::API.new.fetch(new_search)
@@ -104,9 +109,9 @@ class RecipeCli::CLI
        @user_selection = (gets.chomp!.to_i)-1
         
       end
-    end
+  end
   
-    def recipe_choices
+  def recipe_choices
       
       choice = ""
       
@@ -153,7 +158,7 @@ class RecipeCli::CLI
       end
   end
 
-    def search_or_quit
+  def search_or_quit
       
         choice = ""
         
@@ -173,8 +178,8 @@ class RecipeCli::CLI
           puts "Sorry, I don't understand that."
         end
       end
-     end
-   end
+  end
+end
    
 
 
