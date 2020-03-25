@@ -1,9 +1,11 @@
 class RecipeCli::CLI
   
+  attr_accessor :key_words, :restrictions, :kcal, :recipe_list, :user_selection
+  
   def call 
     puts "Hello! Welcome to Recipe Search. What ingredients would you like to search for?"
-     key_words = ""
-     key_words = gets.chomp!
+     @key_words = ""
+     @key_words = gets.chomp!
      self.dietary_restrictions
      self.calorie_limit
      self.recipe_search
@@ -36,21 +38,21 @@ class RecipeCli::CLI
         
           case choice
             when "1" 
-              restrictions = "vegetarian"
+              @restrictions = "vegetarian"
             when "2"
-              restrictions = "vegan"
+              @restrictions = "vegan"
             when "3"
-              restrictions = "tree-nut-free"
+              @restrictions = "tree-nut-free"
             when "4"
-              restrictions = "peanut-free"
+              @restrictions = "peanut-free"
             when "5"
-              restrictions = "sugar-conscious"
+              @restrictions = "sugar-conscious"
             else 
               puts "Please choose 1-5 from list."
             end
           end
         elsif dietary == "N"
-        restrictions = nil 
+        @restrictions = nil 
       else
         puts "Please choose Y or N."
         end
@@ -69,9 +71,9 @@ class RecipeCli::CLI
         
         if choice == "Y"
           puts "Please enter calorie limit"
-          kcal = gets.chomp!.to_i 
+          @kcal = gets.chomp!.to_i 
         elsif choice == "N" 
-          kcal = nil
+          @kcal = nil
         else 
           puts "Please choose Y or N."
         end 
@@ -85,21 +87,21 @@ class RecipeCli::CLI
       
       puts"Select Recipe From Available List"
       
-      user_selection = -1
+      @user_selection = -1
       
-      recipe_list = []
-      recipe_list =  RecipeCli::Recipe.all.select {|recipe| recipe.ingredients == new_search}
+      @recipe_list = []
+      @recipe_list =  RecipeCli::Recipe.all.select {|recipe| recipe.ingredients == new_search}
       
       
-      until user_selection.to_i >= 0 && user_selection.to_i <= recipe_list.size - 1
+      until @user_selection.to_i >= 0 && @user_selection.to_i <= recipe_list.size - 1
   
       
-      recipe_list.each.with_index(1) do |recipe, index|
+      @recipe_list.each.with_index(1) do |recipe, index|
         name = recipe.name 
         puts "#{index}. #{name}" 
         end
       
-       user_selection = (gets.chomp!.to_i)-1
+       @user_selection = (gets.chomp!.to_i)-1
         
       end
     end
@@ -121,27 +123,27 @@ class RecipeCli::CLI
     
       case choice 
         when "1"
-            puts "#{recipe_list[user_selection].link}"  
+            puts "#{@recipe_list[@user_selection].link}"  
             puts " "
             puts " "
         when "2"
-           recipe_list[user_selection].ingredientLines.each do |ingredient|
+           @recipe_list[@user_selection].ingredientLines.each do |ingredient|
             puts "#{ingredient}"
           end
             puts " "
             puts " "
         when "3"
-            recipe_list[user_selection].health_labels.each do |health|
+            @recipe_list[@user_selection].health_labels.each do |health|
             puts "#{health}"
           end
             puts " "
             puts " "
         when "4"
-           puts "#{recipe_list[user_selection].calories.to_i}"
+           puts "#{@recipe_list[@user_selection].calories.to_i}"
             puts " "
             puts " "
         when "5"
-           puts "#{recipe_list[user_selection].recipe_yield}"
+           puts "#{@recipe_list[@user_selection].recipe_yield}"
             puts " "
             puts " "
         else 
@@ -174,6 +176,5 @@ class RecipeCli::CLI
      end
    end
    
-   
- end
+
 
