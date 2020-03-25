@@ -95,7 +95,7 @@ class RecipeCli::CLI
       @user_selection = -1
       
       @recipe_list = []
-      @recipe_list =  RecipeCli::Recipe.all.select {|recipe| recipe.ingredients == new_search}
+      @recipe_list =  RecipeCli::Recipe.all.select {|recipe| recipe.user_input == new_search}
       
       
       until @user_selection.to_i >= 0 && @user_selection.to_i <= recipe_list.size - 1

@@ -1,6 +1,6 @@
 class RecipeCli::Recipe 
   
-  attr_accessor :name, :link, :recipe_yield, :ingredientLines, :health_labels, :calories, :ingredients
+  attr_accessor :name, :link, :recipe_yield, :ingredientLines, :health_labels, :calories, :user_input
   
   @@all = []
   
@@ -11,7 +11,7 @@ class RecipeCli::Recipe
     @health_labels = health_labels
     @ingredientLines = ingredientLines
     @calories = kcal 
-    @ingredients = instance 
+    @user_input = instance 
     @@all << self
   end
     
