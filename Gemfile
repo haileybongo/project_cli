@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem 'httparty', '~> 0.13.7'
+gem 'httparty', '~> 0.21.0'
 
 gem 'pry', '~> 0.10.3'
 
